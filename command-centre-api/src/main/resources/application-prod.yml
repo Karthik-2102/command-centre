@@ -13,8 +13,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   sql:
     init:
-      mode: always
-      continue-on-error: true
+      mode: never
 
 server:
   port: ${PORT:8080}
