@@ -19,6 +19,7 @@ An all-in-one developer productivity platform, roadmap tracker, and AI Learning 
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Java 21 & Spring Boot 3.3+**
 - **Spring Security 6** (Stateless authentication, BCrypt, session tokens)
 - **Spring Data JPA & Hibernate**
@@ -28,6 +29,7 @@ An all-in-one developer productivity platform, roadmap tracker, and AI Learning 
 - **Docker** (Multi-stage containerization)
 
 ### Frontend
+
 - **React 18 & Vite**
 - **Tailwind CSS** (Dark cyber-command aesthetic)
 - **Lucide React Icons**
@@ -38,11 +40,13 @@ An all-in-one developer productivity platform, roadmap tracker, and AI Learning 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Java 21 JDK
 - Node.js 18+ & npm
 - PostgreSQL (or local H2 default)
 
 ### 1. Environment Configuration
+
 Copy `.env.example` to `.env` and provide your credentials:
 
 ```bash
@@ -50,18 +54,22 @@ cp .env.example .env
 ```
 
 ### 2. Run Backend
+
 ```bash
 cd command-centre-api
 ./mvnw spring-boot:run
 ```
+
 API runs on `http://localhost:8080`.
 
 ### 3. Run Frontend
+
 ```bash
 cd command-centre-ui
 npm install
 npm run dev
 ```
+
 UI runs on `http://localhost:5173`.
 
 ---
@@ -75,4 +83,5 @@ UI runs on `http://localhost:5173`.
 ---
 
 ## 👤 Author
+
 - **Karthik** — [GitHub Profile](https://github.com/Karthik-2102/)
