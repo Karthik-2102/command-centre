@@ -22,7 +22,7 @@ public class CommandCentreApplication {
         }
         if (dbUrl != null && !dbUrl.isBlank()) {
             dbUrl = dbUrl.trim();
-            // Handle postgres:// or postgresql:// (Render/Heroku native connection strings)
+            // Handle postgres:// or postgresql:// (Render native connection strings)
             if (dbUrl.startsWith("postgres://") || dbUrl.startsWith("postgresql://")) {
                 try {
                     java.net.URI uri = new java.net.URI(dbUrl);
@@ -34,8 +34,11 @@ public class CommandCentreApplication {
                     }
                     String host = uri.getHost();
                     int port = uri.getPort() > 0 ? uri.getPort() : 5432;
-                    String path = uri.getPath() != null && !uri.getPath().isEmpty() ? uri.getPath() : "/command_centre";
-                    String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + path + "?sslmode=require";
+                    String path = uri.getPath() != null && !uri.getPath().isEmpty() ? uri.getPath() : "/command_centre_v7g7";
+                    // Internal Render hostnames (no dots, e.g. dpg-xxx-a) use internal network without SSL
+                    boolean isInternal = host != null && !host.contains(".");
+                    String sslParam = isInternal ? "" : "?sslmode=require";
+                    String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + path + sslParam;
                     System.setProperty("spring.datasource.url", jdbcUrl);
                     System.setProperty("DB_URL", jdbcUrl);
                     System.out.println("[Environment] Normalized Render Database URL to: " + jdbcUrl);
@@ -45,7 +48,7 @@ public class CommandCentreApplication {
             } else if (!dbUrl.startsWith("jdbc:")) {
                 // Handles bare hostname or host:port e.g. "dpg-dc0oru0m7kps73e5rf30-a"
                 String host = dbUrl;
-                String dbName = "command_centre";
+                String dbName = "command_centre_v7g7";
                 if (host.contains("/")) {
                     int slashIdx = host.indexOf('/');
                     dbName = host.substring(slashIdx + 1);
@@ -57,14 +60,18 @@ public class CommandCentreApplication {
                     host = hParts[0];
                     port = hParts[1];
                 }
-                String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + "?sslmode=require";
+                boolean isInternal = !host.contains(".");
+                String sslParam = isInternal ? "" : "?sslmode=require";
+                String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + sslParam;
                 System.setProperty("spring.datasource.url", jdbcUrl);
                 System.setProperty("DB_URL", jdbcUrl);
                 System.out.println("[Environment] Normalized bare host to JDBC URL: " + jdbcUrl);
             } else if (dbUrl.startsWith("jdbc:postgresql://") && !dbUrl.contains("sslmode=")) {
-                String sslUrl = dbUrl.contains("?") ? dbUrl + "&sslmode=require" : dbUrl + "?sslmode=require";
-                System.setProperty("spring.datasource.url", sslUrl);
-                System.setProperty("DB_URL", sslUrl);
+                if (dbUrl.contains(".render.com")) {
+                    String sslUrl = dbUrl.contains("?") ? dbUrl + "&sslmode=require" : dbUrl + "?sslmode=require";
+                    System.setProperty("spring.datasource.url", sslUrl);
+                    System.setProperty("DB_URL", sslUrl);
+                }
             }
         }
     }
