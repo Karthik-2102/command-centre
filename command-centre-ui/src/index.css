@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e1e2e;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2e2e3e;
+  }
+}
+
+/* Universal Form Controls, Inputs & Select Dropdowns */
+:root {
+  color-scheme: dark;
+}
+
+input, select, textarea {
+  color-scheme: dark !important;
+  background-color: #0b1017;
+  color: #f8fafc;
+  border-color: #1e293b;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+input:hover, select:hover, textarea:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.25) !important;
+  outline: none !important;
+}
+
+/* Neutralize Chrome/Edge white autofill box shadow */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #0b1017 inset !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  caret-color: #00f0ff !important;
+  border-color: #1e293b !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Native select popup menu styling */
+select option {
+  background-color: #0d131f !important;
+  color: #f8fafc !important;
+  padding: 8px 12px;
+}
+select option:checked {
+  background-color: #00f0ff22 !important;
+  color: #00f0ff !important;
+}
+
+/* Light / Slate Titanium Theme overrides when 'light' is toggled */
+html.light {
+  --theme-bg: #161924;
+  --theme-card: #1f2434;
+  --theme-card-hover: #272e42;
+  --theme-border: #2d354a;
+}
+
+html.light body {
+  background-color: #161924 !important;
+  color: #f8fafc !important;
+}
+
+/* Re-skin surfaces smoothly in Slate mode without breaking text or opacity */
+html.light .bg-dark-bg,
+html.light .bg-\[\#0a0a0f\] {
+  background-color: #161924 !important;
+}
+
+html.light .bg-dark-card,
+html.light .bg-\[\#111119\] {
+  background-color: #1f2434 !important;
+}
+
+html.light .border-dark-border,
+html.light .border-\[\#1e1e2e\] {
+  border-color: #2d354a !important;
+}
+
+html.light .bg-dark-hover {
+  background-color: #272e42 !important;
+}
+
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #121826 !important;
+  border-color: #26334a !important;
+  color: #f8fafc !important;
+}
+
+html.light input:hover,
+html.light select:hover,
+html.light textarea:hover {
+  border-color: rgba(6, 182, 212, 0.5) !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
+}
+
+html.light input:-webkit-autofill,
+html.light input:-webkit-autofill:hover, 
+html.light input:-webkit-autofill:focus, 
+html.light input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #121826 inset !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
+
+html.light select option {
+  background-color: #192236 !important;
+  color: #f8fafc !important;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #161924;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #2d354a;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-dark-card/90 backdrop-blur-md border border-dark-border rounded-xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300
+           hover:border-neon-cyan/40 hover:shadow-glow-cyan;
+  }
+
+  .neon-border {
+    @apply border border-neon-cyan/20 shadow-glow-cyan;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-cyan to-neon-purple bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply px-6 py-2.5 rounded-lg font-medium text-sm
+           bg-gradient-to-r from-neon-cyan/90 to-neon-cyan
+           text-dark-bg hover:shadow-glow-cyan
+           transition-all duration-300 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2.5 rounded-lg font-medium text-sm
+           border border-dark-border text-gray-300
+           hover:border-neon-cyan/30 hover:text-neon-cyan
+           transition-all duration-300 active:scale-95;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg text-sm
+           bg-dark-bg border border-dark-border text-white
+           placeholder-gray-500
+           focus:outline-none focus:border-neon-cyan/50 focus:shadow-glow-cyan
+           transition-all duration-300;
+  }
+}

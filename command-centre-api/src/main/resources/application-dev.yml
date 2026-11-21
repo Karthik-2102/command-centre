@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/command_centre;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+logging:
+  level:
+    com.karthik.commandcentre: INFO
+    org.springframework.security: INFO
+
+app:
+  owner:
+    email: ${OWNER_EMAIL:karthikvikash02@gmail.com}
+    name: ${OWNER_NAME:Karthik}
+    password: ${OWNER_PASSWORD:CommandCentre@2024}
+  resend:
+    api-key: ${RESEND_API_KEY:re_WD3tbQrR_Ly8unwBZi8q4Ppq2xXVizEkU}
+    from-email: '${RESEND_FROM_EMAIL:Command Centre <onboarding@resend.dev>}'
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-3.5-flash-lite}
+  groq:
+    api-key: ${GROQ_API_KEY:}
+    model: ${GROQ_MODEL:llama-3.3-70b-versatile}
+  ollama:
+    base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+    model: ${OLLAMA_MODEL:llama3}

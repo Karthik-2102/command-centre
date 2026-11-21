@@ -1,0 +1,33 @@
+# Environment & Secrets (CRITICAL: NEVER COMMIT SECRETS)
+.env
+*.env
+.env.*
+!.env.example
+
+# Local Database & Storage
+data/
+*.mv.db
+*.trace.db
+
+# Java & Maven
+target/
+command-centre-api/target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+
+# Node & Frontend
+node_modules/
+command-centre-ui/node_modules/
+dist/
+command-centre-ui/dist/
+*.log
+npm-debug.log*
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
