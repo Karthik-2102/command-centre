@@ -209,7 +209,7 @@ public class DataInitializer implements CommandLineRunner {
                 .name("Personal Developer Command Centre")
                 .description("Private full-stack cockpit tracking 10-month backend engineering journey, DSA SRS practice, daily tasks, study sprints, and career prep.")
                 .techStack("Java 21, Spring Boot 3, Spring Security 6, PostgreSQL, React 18, Vite, Tailwind CSS")
-                .githubUrl("https://github.com/karthik/command-centre")
+                .githubUrl("https://github.com/Karthik-2102/command-centre")
                 .liveUrl("http://localhost:5173")
                 .status("IN_PROGRESS")
                 .featuresCompleted("Dual session authentication with 2FA OTP\nLearning roadmap telemetry with 6 stages\nFocus timer with Pomodoro and Stopwatch\nDSA Spaced Repetition engine\nInteractive interview flashcard mode")

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FolderGit2, ExternalLink, GitCommit, Flame, Check, Edit2 } from "lucide-react";
 import Card from "./ui/Card";
 
-export default function GitHubHeatmapCard({ initialUsername = "Karthik" }) {
+export default function GitHubHeatmapCard({ initialUsername = "Karthik-2102" }) {
   const [username, setUsername] = useState(() => {
     return localStorage.getItem("cc_github_username") || initialUsername;
   });

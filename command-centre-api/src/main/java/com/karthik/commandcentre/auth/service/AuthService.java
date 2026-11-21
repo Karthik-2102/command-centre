@@ -84,18 +84,21 @@ public class AuthService {
         Owner owner = ownerRepository.findByEmail(normalizedEmail)
                 .orElseThrow(() -> ApiException.unauthorized("Owner profile not found."));
 
-        // Generate dynamic password (10 characters, diverse names/alphabets, symbols, digits)
+        // Generate dynamic password (10 characters, diverse names/alphabets, symbols,
+        // digits)
         String dynamicPassword = generateDynamicPasswordValue();
         owner.setDynamicPasswordHash(passwordEncoder.encode(dynamicPassword));
         owner.setDynamicPasswordExpiry(LocalDateTime.now().plusMinutes(3));
         ownerRepository.save(owner);
 
-        // Dispatch dynamic password to registered Gmail via Resend (valid for 3 minutes)
+        // Dispatch dynamic password to registered Gmail via Resend (valid for 3
+        // minutes)
         emailService.sendDynamicPasswordEmail(normalizedEmail, dynamicPassword, 3);
 
         return AuthResponse.builder()
                 .step("PASSWORD_REQUIRED")
-                .message("Dynamic 10-character login password (valid for 3 mins) dispatched to " + normalizedEmail + ".")
+                .message(
+                        "Dynamic 10-character login password (valid for 3 mins) dispatched to " + normalizedEmail + ".")
                 .build();
     }
 
@@ -127,15 +130,16 @@ public class AuthService {
     }
 
     private static final java.util.List<String> DYNAMIC_BASE_NAMES = java.util.List.of(
-            "Vikash", "Karthik", "Vrsyer", "Nexus", "Cyber", "Titan", "Falcon", "Apex", "Quantum", "Shadow", "Torval", "Zelph"
-    );
+            "Vikash", "Karthik", "Vrsyer", "Nexus", "Cyber", "Titan", "Falcon", "Apex", "Quantum", "Shadow", "Torval",
+            "Zelph");
     private static final String SPECIAL_SYMBOLS = "@#$%&!";
     private static final String LOWER_LETTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String DIGIT_CHARS = "0123456789";
 
     /**
-     * Generates a 10-character dynamic password using diverse names, random alphabets, symbols & digits.
+     * Generates a 10-character dynamic password using diverse names, random
+     * alphabets, symbols & digits.
      * Examples: Vrsye@2589, Vikash@#02, Karthik@12, Titan#9201.
      */
     private String generateDynamicPasswordValue() {
@@ -179,7 +183,8 @@ public class AuthService {
 
     /**
      * Step 2: Password Verification.
-     * Verifies owner dynamic password (or master password fallback), initiates OTP generation & delivery.
+     * Verifies owner dynamic password (or master password fallback), initiates OTP
+     * generation & delivery.
      */
     @Transactional
     public AuthResponse verifyPassword(PasswordVerifyRequest request, HttpServletRequest httpRequest) {
@@ -209,7 +214,8 @@ public class AuthService {
 
         if (!matchesDynamic && !matchesPermanent) {
             recordLoginAttempt(normalizedEmail, clientIp, false, "Incorrect password");
-            throw ApiException.unauthorized("Incorrect password. Please enter the dynamic password sent to your Gmail.");
+            throw ApiException
+                    .unauthorized("Incorrect password. Please enter the dynamic password sent to your Gmail.");
         }
 
         // On successful match, clear the dynamic password
