@@ -75,4 +75,4 @@ UI runs on `http://localhost:5173`.
 ---
 
 ## 👤 Author
-- **Karthik** — [GitHub Profile](https://github.com/karthikvikash)
+- **Karthik** — [GitHub Profile](https://github.com/karthik-2102)
