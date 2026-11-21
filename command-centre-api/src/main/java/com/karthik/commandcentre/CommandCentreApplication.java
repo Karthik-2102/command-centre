@@ -42,6 +42,25 @@ public class CommandCentreApplication {
                 } catch (Exception e) {
                     System.err.println("[Environment] Could not parse DB_URL: " + e.getMessage());
                 }
+            } else if (!dbUrl.startsWith("jdbc:")) {
+                // Handles bare hostname or host:port e.g. "dpg-dc0oru0m7kps73e5rf30-a"
+                String host = dbUrl;
+                String dbName = "command_centre";
+                if (host.contains("/")) {
+                    int slashIdx = host.indexOf('/');
+                    dbName = host.substring(slashIdx + 1);
+                    host = host.substring(0, slashIdx);
+                }
+                String port = "5432";
+                if (host.contains(":")) {
+                    String[] hParts = host.split(":", 2);
+                    host = hParts[0];
+                    port = hParts[1];
+                }
+                String jdbcUrl = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + "?sslmode=require";
+                System.setProperty("spring.datasource.url", jdbcUrl);
+                System.setProperty("DB_URL", jdbcUrl);
+                System.out.println("[Environment] Normalized bare host to JDBC URL: " + jdbcUrl);
             } else if (dbUrl.startsWith("jdbc:postgresql://") && !dbUrl.contains("sslmode=")) {
                 String sslUrl = dbUrl.contains("?") ? dbUrl + "&sslmode=require" : dbUrl + "?sslmode=require";
                 System.setProperty("spring.datasource.url", sslUrl);
