@@ -28,11 +28,11 @@ server:
 
 app:
   owner:
-    email: ${OWNER_EMAIL:karthikvikash02@gmail.com}
-    name: ${OWNER_NAME:Karthik}
-    password: ${OWNER_PASSWORD:CommandCentre@2024}
+    email: ${OWNER_EMAIL:owner@example.com}
+    name: ${OWNER_NAME:Developer}
+    password: ${OWNER_PASSWORD:}
   resend:
-    api-key: ${RESEND_API_KEY:re_WD3tbQrR_Ly8unwBZi8q4Ppq2xXVizEkU}
+    api-key: ${RESEND_API_KEY:}
     from-email: '${RESEND_FROM_EMAIL:Command Centre <onboarding@resend.dev>}'
   session:
     timeout-hours: ${SESSION_TIMEOUT_HOURS:24}

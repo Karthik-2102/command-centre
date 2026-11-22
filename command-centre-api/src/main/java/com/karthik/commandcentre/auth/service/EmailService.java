@@ -1,7 +1,6 @@
 package com.karthik.commandcentre.auth.service;
 
 import com.resend.Resend;
-import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
 import com.resend.services.emails.model.CreateEmailResponse;
 import lombok.extern.slf4j.Slf4j;
