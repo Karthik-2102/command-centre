@@ -50,10 +50,12 @@ public class EmailService {
 
       CreateEmailResponse response = resend.emails().send(sendOptions);
       log.info("2FA OTP Email sent successfully via Resend. ID: {}", response.getId());
-    } catch (ResendException e) {
+    } catch (Exception e) {
       log.error("Failed to send 2FA OTP email via Resend: {}", e.getMessage(), e);
-      log.warn("FALLBACK LOGIN OTP: {}", otp);
-      throw new RuntimeException("Failed to dispatch 2FA verification email. Please check configuration or try again.");
+      log.warn("==================================================================");
+      log.warn(">>> YOUR 2FA OTP CODE IS: {} <<<", otp);
+      log.warn("Expires in: {} minutes", expiryMinutes);
+      log.warn("==================================================================");
     }
   }
 
@@ -84,10 +86,12 @@ public class EmailService {
 
       CreateEmailResponse response = resend.emails().send(sendOptions);
       log.info("Dynamic Password Email sent successfully via Resend. ID: {}", response.getId());
-    } catch (ResendException e) {
+    } catch (Exception e) {
       log.error("Failed to send Dynamic Password email via Resend: {}", e.getMessage(), e);
-      log.warn("FALLBACK DYNAMIC PASSWORD: {}", dynamicPassword);
-      throw new RuntimeException("Failed to dispatch dynamic password email. Please check configuration or try again.");
+      log.warn("==================================================================");
+      log.warn(">>> YOUR DYNAMIC PASSWORD IS: {} <<<", dynamicPassword);
+      log.warn("Expires in: {} minutes", expiryMinutes);
+      log.warn("==================================================================");
     }
   }
 

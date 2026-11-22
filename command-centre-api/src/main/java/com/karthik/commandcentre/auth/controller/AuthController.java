@@ -22,7 +22,8 @@ public class AuthController {
     private final AuthService authService;
 
     /**
-     * Public lightweight health check for uptime pingers (cron-job.org, UptimeRobot).
+     * Public lightweight health check for uptime pingers (cron-job.org,
+     * UptimeRobot).
      * Returns 200 OK with minimal payload to keep Render awake.
      */
     @GetMapping("/health")
@@ -51,7 +52,8 @@ public class AuthController {
 
     /**
      * Step 2: Verify Password.
-     * Validates owner password and triggers 2FA OTP generation and delivery via email.
+     * Validates owner password and triggers 2FA OTP generation and delivery via
+     * email.
      */
     @PostMapping("/verify-password")
     public ResponseEntity<ApiResponse<AuthResponse>> verifyPassword(

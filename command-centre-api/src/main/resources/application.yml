@@ -35,7 +35,7 @@ app:
     api-key: ${RESEND_API_KEY:re_WD3tbQrR_Ly8unwBZi8q4Ppq2xXVizEkU}
     from-email: '${RESEND_FROM_EMAIL:Command Centre <onboarding@resend.dev>}'
   session:
-    timeout-hours: ${SESSION_TIMEOUT_HOURS:1}
+    timeout-hours: ${SESSION_TIMEOUT_HOURS:24}
   otp:
     expiry-minutes: ${OTP_EXPIRY_MINUTES:2}
     max-attempts: ${OTP_MAX_ATTEMPTS:5}
