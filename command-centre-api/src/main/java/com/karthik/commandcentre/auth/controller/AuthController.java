@@ -22,6 +22,15 @@ public class AuthController {
     private final AuthService authService;
 
     /**
+     * Public lightweight health check for uptime pingers (cron-job.org, UptimeRobot).
+     * Returns 200 OK with minimal payload to keep Render awake.
+     */
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("UP");
+    }
+
+    /**
      * Step 1: Validate Email.
      * Checks if email matches registered owner.
      */
